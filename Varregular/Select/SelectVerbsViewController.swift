@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SelectVerbsViewController: UIViewController {
+final class SelectVerbsViewController: UITableViewController {
 
     
     // MARK: - Lifecycle
@@ -16,4 +16,6 @@ final class SelectVerbsViewController: UIViewController {
 
         view.backgroundColor = .red
     }
+    
+    
 }

@@ -32,7 +32,7 @@ class IrregularVerbs {
             Verb(infinitive: "take", pastSimple: "took", participle: "taken"),
             Verb(infinitive: "feel", pastSimple: "felt", participle: "felt"),
             Verb(infinitive: "get", pastSimple: "got", participle: "got"),
-            Verb(infinitive: "know", pastSimple: "knew", participle: "known")  
+            Verb(infinitive: "know", pastSimple: "knew", participle: "known")
         ]
     }
 }

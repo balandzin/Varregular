@@ -20,6 +20,8 @@
 		D32B39ED2BA229FC00A14C68 /* SelectVerbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B39EC2BA229FC00A14C68 /* SelectVerbTableViewCell.swift */; };
 		D32B39EF2BA2303100A14C68 /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B39EE2BA2303100A14C68 /* UIView+Ex.swift */; };
 		D32B39F12BA230EF00A14C68 /* UIStackView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B39F02BA230EF00A14C68 /* UIStackView+Ex.swift */; };
+		D3F7EBDA2BA3539C0006A2A3 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F7EBD82BA3539C0006A2A3 /* Verb.swift */; };
+		D3F7EBDB2BA3539C0006A2A3 /* IrregularVerbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F7EBD92BA3539C0006A2A3 /* IrregularVerbs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		D32B39EC2BA229FC00A14C68 /* SelectVerbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVerbTableViewCell.swift; sourceTree = "<group>"; };
 		D32B39EE2BA2303100A14C68 /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
 		D32B39F02BA230EF00A14C68 /* UIStackView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ex.swift"; sourceTree = "<group>"; };
+		D3F7EBD82BA3539C0006A2A3 /* Verb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
+		D3F7EBD92BA3539C0006A2A3 /* IrregularVerbs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrregularVerbs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +77,8 @@
 			children = (
 				D308B7C12BA0DD4C0049C758 /* AppDelegate.swift */,
 				D32A70E62BA207D200B4ECC9 /* Home */,
-				D32A70F22BA2109400B4ECC9 /* Train */,
 				D32A70F12BA2108A00B4ECC9 /* Select */,
+				D32A70F22BA2109400B4ECC9 /* Train */,
 				D32A70E42BA207A600B4ECC9 /* Extensions */,
 				D308B7CA2BA0DD4D0049C758 /* Assets.xcassets */,
 				D32A70EB2BA2084100B4ECC9 /* Localizable.strings */,
@@ -113,8 +117,9 @@
 		D32A70F12BA2108A00B4ECC9 /* Select */ = {
 			isa = PBXGroup;
 			children = (
-				D32A70ED2BA2104000B4ECC9 /* SelectVerbsViewController.swift */,
-				D32B39EC2BA229FC00A14C68 /* SelectVerbTableViewCell.swift */,
+				D3F7EBD72BA3534C0006A2A3 /* Model */,
+				D3F7EBD22BA3506E0006A2A3 /* Controller */,
+				D3F7EBD12BA350580006A2A3 /* View */,
 			);
 			path = Select;
 			sourceTree = "<group>";
@@ -125,6 +130,31 @@
 				D32A70EF2BA2106700B4ECC9 /* TrainViewController.swift */,
 			);
 			path = Train;
+			sourceTree = "<group>";
+		};
+		D3F7EBD12BA350580006A2A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D32B39EC2BA229FC00A14C68 /* SelectVerbTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D3F7EBD22BA3506E0006A2A3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D32A70ED2BA2104000B4ECC9 /* SelectVerbsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D3F7EBD72BA3534C0006A2A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7EBD92BA3539C0006A2A3 /* IrregularVerbs.swift */,
+				D3F7EBD82BA3539C0006A2A3 /* Verb.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,12 +238,14 @@
 			files = (
 				D32B39ED2BA229FC00A14C68 /* SelectVerbTableViewCell.swift in Sources */,
 				D32A70E32BA2079B00B4ECC9 /* String+Ex.swift in Sources */,
+				D3F7EBDB2BA3539C0006A2A3 /* IrregularVerbs.swift in Sources */,
 				D308B7C62BA0DD4C0049C758 /* HomeViewController.swift in Sources */,
 				D32A70F02BA2106700B4ECC9 /* TrainViewController.swift in Sources */,
 				D308B7C22BA0DD4C0049C758 /* AppDelegate.swift in Sources */,
 				D32A70EE2BA2104000B4ECC9 /* SelectVerbsViewController.swift in Sources */,
 				D32B39F12BA230EF00A14C68 /* UIStackView+Ex.swift in Sources */,
 				D32B39EF2BA2303100A14C68 /* UIView+Ex.swift in Sources */,
+				D3F7EBDA2BA3539C0006A2A3 /* Verb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

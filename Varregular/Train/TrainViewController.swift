@@ -12,6 +12,8 @@ final class TrainViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Select verbs".localized
 
         view.backgroundColor = .yellow
     }

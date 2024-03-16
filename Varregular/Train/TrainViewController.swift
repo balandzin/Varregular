@@ -64,8 +64,25 @@ final class TrainViewController: UIViewController {
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = .systemGray5
         button.layer.cornerRadius = 10
+        
+        button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
         return button
     }()
+    
+    private let dataSource = IrregularVerbs.shared.selectedVerbs
+    
+    private var currentVerb: Verb? {
+        guard count < dataSource.count else { return nil }
+        return dataSource[count]
+    }
+    
+    private var count = 0 {
+        didSet {
+            infinitiveLabel.text = currentVerb?.infinitive
+            pastSimpleTextField.text = ""
+            participleTextField.text = ""
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -78,9 +95,26 @@ final class TrainViewController: UIViewController {
         registerForKeyboardNotifications()
         unregisterForKeyboardNotifications()
         hideKeyboardWhenTappedAround()
+        
+        infinitiveLabel.text = dataSource.first?.infinitive
     }
     
     // MARK: - Private Methods
+    @objc
+    private func checkAction() {
+        if checkAnswers() {
+            count += 1
+        } else {
+            checkButton.backgroundColor = .red
+            checkButton.setTitle("try again", for: .normal)
+        }
+    }
+    
+    private func checkAnswers() -> Bool {
+        pastSimpleTextField.text?.lowercased() == currentVerb?.pastSimple.lowercased() &&
+        participleTextField.text?.lowercased() == currentVerb?.participle.lowercased()
+    }
+    
     private func setupUI() {
         view.backgroundColor = .white
         

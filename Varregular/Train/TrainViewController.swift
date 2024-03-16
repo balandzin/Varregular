@@ -144,16 +144,19 @@ final class TrainViewController: UIViewController {
             scoreLabel.text = "Score".localized + ": \(score)"
             numberOfVerbLabel.text = "\(count + 1) / \(dataSource.count)"
             
-            if count != dataSource.count - 1 {
-                count += 1
-            }
-            
             if currentVerb?.infinitive != dataSource.last?.infinitive {
-                showAlert(title: "Correct".localized, message: "Score".localized + ": \(score)")
+                showAlert(
+                    title: "Correct".localized,
+                    message: "Score".localized + ": \(score)" + " из ".localized + "\(dataSource.count)"
+                )
             } else {
                 showAlert(title: "Congratulations!".localized) {
                     self.navigationController?.popViewController(animated: true) // ВОТ ТУТ ПРОПИСАЛ ВОЗВРАТ
                 }
+            }
+            
+            if count != dataSource.count - 1 {
+                count += 1
             }
             
              isRightAnswer = true

@@ -11,11 +11,30 @@ import SnapKit
 final class TrainViewController: UIViewController {
     
     // MARK: - Properties
+    private lazy var scoreLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 24)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.text = "Score: 0"
+        return label
+    }()
+    
+    private lazy var numberOfVerbLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.text = "0 / \(dataSource.count)"
+        return label
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.showsVerticalScrollIndicator = false
         
         return view
+        
     }()
     
     private lazy var contentView: UIView = UIView()
@@ -92,11 +111,19 @@ final class TrainViewController: UIViewController {
         
         setupUI()
         
-        registerForKeyboardNotifications()
-        unregisterForKeyboardNotifications()
         hideKeyboardWhenTappedAround()
         
         infinitiveLabel.text = dataSource.first?.infinitive
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerForKeyboardNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unregisterForKeyboardNotifications()
     }
     
     // MARK: - Private Methods
@@ -104,10 +131,14 @@ final class TrainViewController: UIViewController {
     private func checkAction() {
         if checkAnswers() {
             count += 1
+            checkButton.backgroundColor = .systemGray5
+            checkButton.setTitle("Check", for: .normal)
+            
+            numberOfVerbLabel.text = "\(count) / \(dataSource.count)"
         } else {
-            checkButton.backgroundColor = .red
-            checkButton.setTitle("try again", for: .normal)
-        }
+                checkButton.backgroundColor = .red
+                checkButton.setTitle("try again", for: .normal)
+            }
     }
     
     private func checkAnswers() -> Bool {
@@ -121,6 +152,8 @@ final class TrainViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews([
+            scoreLabel,
+            numberOfVerbLabel,
             infinitiveLabel,
             pastSimpleLabel,
             pastSimpleTextField,
@@ -139,6 +172,16 @@ final class TrainViewController: UIViewController {
         
         contentView.snp.makeConstraints { make in
             make.size.edges.equalToSuperview()
+        }
+        
+        scoreLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        numberOfVerbLabel.snp.makeConstraints { make in
+            make.top.equalTo(scoreLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(30)
         }
         
         infinitiveLabel.snp.makeConstraints { make in
@@ -195,12 +238,23 @@ private extension TrainViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-    }
-    
-    func unregisterForKeyboardNotifications() {
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )

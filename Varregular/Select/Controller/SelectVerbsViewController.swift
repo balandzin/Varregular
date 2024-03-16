@@ -18,6 +18,8 @@ final class SelectVerbsViewController: UITableViewController {
         
         title = "Select verbs".localized
         
+        dataSource.selectedVerbs = dataSource.verbs
+        
         view.backgroundColor = .white
         tableView.register(SelectVerbTableViewCell.self,
                            forCellReuseIdentifier: "SelectVerbTableViewCell")

@@ -26,7 +26,7 @@ final class SelectVerbTableViewCell: UITableViewCell {
     // MARAK: - GUI Variables
     private lazy var checkboxImageView: UIImageView = {
         let view = UIImageView()
-        view.image = State.unselect.image
+        view.image = State.select.image
         view.contentMode = .center
         return view
     }()

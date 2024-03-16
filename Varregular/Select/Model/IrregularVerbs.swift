@@ -39,7 +39,6 @@ class IrregularVerbs {
             Verb(infinitive: "say", pastSimple: "said", participle: "said"),
             Verb(infinitive: "make", pastSimple: "made", participle: "made"),
             Verb(infinitive: "take", pastSimple: "took", participle: "taken"),
-            Verb(infinitive: "feel", pastSimple: "felt", participle: "felt"),
             Verb(infinitive: "get", pastSimple: "got", participle: "got"),
             Verb(infinitive: "know", pastSimple: "knew", participle: "known")
         ]

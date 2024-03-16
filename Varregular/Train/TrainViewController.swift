@@ -151,8 +151,9 @@ final class TrainViewController: UIViewController {
             if currentVerb?.infinitive != dataSource.last?.infinitive {
                 showAlert(title: "Correct".localized, message: "Score".localized + ": \(score)")
             } else {
-                showAlert(title: "Congratulations!".localized)
-                navigationController?.popViewController(animated: true)
+                showAlert(title: "Congratulations!".localized) {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
             
              isRightAnswer = true

@@ -25,7 +25,7 @@ final class TrainViewController: UIViewController {
         label.font = .boldSystemFont(ofSize: 18)
         label.textColor = .black
         label.textAlignment = .center
-        label.text = "0 / \(dataSource.count)"
+        label.text = "\(count + 1) / \(dataSource.count)"
         return label
     }()
     
@@ -103,6 +103,10 @@ final class TrainViewController: UIViewController {
         }
     }
     
+    private var score = 0
+    
+    private var isRightAnswer = true
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,11 +138,20 @@ final class TrainViewController: UIViewController {
             checkButton.backgroundColor = .systemGray5
             checkButton.setTitle("Check", for: .normal)
             
-            numberOfVerbLabel.text = "\(count) / \(dataSource.count)"
+            scoreLabel.text = "Score: \(score)"
+            numberOfVerbLabel.text = "\(count + 1) / \(dataSource.count)"
+            
+             isRightAnswer = true
         } else {
                 checkButton.backgroundColor = .red
                 checkButton.setTitle("try again", for: .normal)
+            
+            isRightAnswer = false
             }
+        
+        if isRightAnswer {
+            score += 1
+        }
     }
     
     private func checkAnswers() -> Bool {

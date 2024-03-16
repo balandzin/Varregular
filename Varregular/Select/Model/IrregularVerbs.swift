@@ -8,10 +8,19 @@
 import Foundation
 
 class IrregularVerbs {
-    private(set) var verbs: [Verb] = []
-    var selectedVerbs: [Verb] = []
     
-    func configureVerbs() {
+    // MARK: - Singleton
+    static var shared = IrregularVerbs()
+    private init() {
+        configureVerbs()
+    }
+    
+    // MARK: - Properties
+    var selectedVerbs: [Verb] = []
+    private(set) var verbs: [Verb] = []
+    
+    // MARK: - Methods
+    private func configureVerbs() {
         verbs = [
             Verb(infinitive: "be", pastSimple: "was", participle: "been"),
             Verb(infinitive: "do", pastSimple: "did", participle: "done"),

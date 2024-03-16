@@ -51,7 +51,7 @@ final class TrainViewController: UIViewController {
         return field
     }()
     
-    private lazy var pastParticipleTextField: UITextField = {
+    private lazy var participleTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
         field.delegate = self
@@ -91,7 +91,7 @@ final class TrainViewController: UIViewController {
             pastSimpleLabel,
             pastSimpleTextField,
             participleLabel,
-            pastParticipleTextField,
+            participleTextField,
             checkButton
         ])
         
@@ -127,21 +127,29 @@ final class TrainViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(30)
         }
         
-        pastParticipleTextField.snp.makeConstraints { make in
+        participleTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(participleLabel.snp.bottom).offset(10)
         }
         
         checkButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.top.equalTo(pastParticipleTextField.snp.bottom).offset(100)
+            make.top.equalTo(participleTextField.snp.bottom).offset(100)
         }
     }
 }
 
 // MARK: - UITextFieldDelegate
 extension TrainViewController: UITextFieldDelegate {
-    // TODO
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if pastSimpleTextField.isFirstResponder {
+            participleTextField.becomeFirstResponder()
+        } else {
+            scrollView.endEditing(true)
+        }
+        
+        return true
+    }
 }
 
 // MARK: - Keyboard events

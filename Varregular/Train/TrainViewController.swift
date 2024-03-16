@@ -152,7 +152,7 @@ final class TrainViewController: UIViewController {
                 showAlert(title: "Correct".localized, message: "Score".localized + ": \(score)")
             } else {
                 showAlert(title: "Congratulations!".localized) {
-                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popViewController(animated: true) // ВОТ ТУТ ПРОПИСАЛ ВОЗВРАТ
                 }
             }
             

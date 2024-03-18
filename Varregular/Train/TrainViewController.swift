@@ -16,7 +16,7 @@ final class TrainViewController: UIViewController {
         label.font = .boldSystemFont(ofSize: 24)
         label.textColor = .black
         label.textAlignment = .center
-        label.text = "Score: 0"
+        label.text = "Score".localized + ": 0"
         return label
     }()
     
@@ -25,7 +25,7 @@ final class TrainViewController: UIViewController {
         label.font = .boldSystemFont(ofSize: 18)
         label.textColor = .black
         label.textAlignment = .center
-        label.text = "0 / \(dataSource.count)"
+        label.text = "\(count + 1) / \(dataSource.count)"
         return label
     }()
     
@@ -103,6 +103,10 @@ final class TrainViewController: UIViewController {
         }
     }
     
+    private var score = 0
+    
+    private var isRightAnswer = true
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,14 +134,38 @@ final class TrainViewController: UIViewController {
     @objc
     private func checkAction() {
         if checkAnswers() {
-            count += 1
+            if isRightAnswer {
+                score += 1
+            }
+            
             checkButton.backgroundColor = .systemGray5
             checkButton.setTitle("Check", for: .normal)
             
-            numberOfVerbLabel.text = "\(count) / \(dataSource.count)"
+            scoreLabel.text = "Score".localized + ": \(score)"
+            numberOfVerbLabel.text = "\(count + 1) / \(dataSource.count)"
+            
+            if currentVerb?.infinitive != dataSource.last?.infinitive {
+                showAlert(
+                    title: "Correct".localized,
+                    message: "Score".localized + ": \(score)" + " из ".localized + "\(dataSource.count)"
+                )
+            } else {
+                showAlert(title: "Congratulations!".localized, handler: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+                        
+            
+            if count != dataSource.count - 1 {
+                count += 1
+            }
+            
+             isRightAnswer = true
         } else {
                 checkButton.backgroundColor = .red
                 checkButton.setTitle("try again", for: .normal)
+            
+            isRightAnswer = false
             }
     }
     
@@ -165,54 +193,20 @@ final class TrainViewController: UIViewController {
         setupConstraints()
     }
     
-    private func setupConstraints() {
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+    private func showAlert(title: String, message: String? = nil, handler: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        
+        if let handler = handler {
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                handler()
+            }
+            alert.addAction(cancelAction)
         }
         
-        contentView.snp.makeConstraints { make in
-            make.size.edges.equalToSuperview()
-        }
-        
-        scoreLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(20)
-            make.leading.trailing.equalToSuperview().inset(30)
-        }
-        
-        numberOfVerbLabel.snp.makeConstraints { make in
-            make.top.equalTo(scoreLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(30)
-        }
-        
-        infinitiveLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(200)
-            make.centerX.equalToSuperview()
-        }
-        
-        pastSimpleLabel.snp.makeConstraints { make in
-            make.top.equalTo(infinitiveLabel.snp.bottom).offset(60)
-            make.leading.trailing.equalToSuperview().inset(30)
-        }
-        
-        pastSimpleTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.top.equalTo(pastSimpleLabel.snp.bottom).offset(10)
-        }
-        
-        participleLabel.snp.makeConstraints { make in
-            make.top.equalTo(pastSimpleTextField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(30)
-        }
-        
-        participleTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.top.equalTo(participleLabel.snp.bottom).offset(10)
-        }
-        
-        checkButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.top.equalTo(participleTextField.snp.bottom).offset(100)
-        }
+
+        present(alert, animated: true)
     }
 }
 
@@ -275,5 +269,58 @@ private extension TrainViewController {
     
     @objc func hideKeyboard() {
         scrollView.endEditing(true)
+    }
+}
+
+// MARK: - Setup Constraints
+extension TrainViewController {
+    private func setupConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.size.edges.equalToSuperview()
+        }
+        
+        scoreLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        numberOfVerbLabel.snp.makeConstraints { make in
+            make.top.equalTo(scoreLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        infinitiveLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(200)
+            make.centerX.equalToSuperview()
+        }
+        
+        pastSimpleLabel.snp.makeConstraints { make in
+            make.top.equalTo(infinitiveLabel.snp.bottom).offset(60)
+            make.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        pastSimpleTextField.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.top.equalTo(pastSimpleLabel.snp.bottom).offset(10)
+        }
+        
+        participleLabel.snp.makeConstraints { make in
+            make.top.equalTo(pastSimpleTextField.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        participleTextField.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.top.equalTo(participleLabel.snp.bottom).offset(10)
+        }
+        
+        checkButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.top.equalTo(participleTextField.snp.bottom).offset(100)
+        }
     }
 }

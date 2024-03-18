@@ -150,10 +150,11 @@ final class TrainViewController: UIViewController {
                     message: "Score".localized + ": \(score)" + " из ".localized + "\(dataSource.count)"
                 )
             } else {
-                showAlert(title: "Congratulations!".localized) {
-                    self.navigationController?.popViewController(animated: true) // ВОТ ТУТ ПРОПИСАЛ ВОЗВРАТ
-                }
+                showAlert(title: "Congratulations!".localized, handler: {
+                    self.navigationController?.popViewController(animated: true)
+                })
             }
+                        
             
             if count != dataSource.count - 1 {
                 count += 1
@@ -196,6 +197,15 @@ final class TrainViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
+        
+        if let handler = handler {
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                handler()
+            }
+            alert.addAction(cancelAction)
+        }
+        
+
         present(alert, animated: true)
     }
 }

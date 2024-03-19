@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
         view.addSubview(firstButton)
         view.addSubview(secondButton)
         
-        view.backgroundColor = .white
+        view.addVerticalGradientLayer()
 
         configureConstraints()
     }

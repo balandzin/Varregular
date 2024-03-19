@@ -19,7 +19,7 @@ Varregular обладает удобным и интуитивно понятн�
 - [x] Произвести рефакторинг
 
 ## Скриншоты приложения
-<img width="472" alt="Снимок экрана 2024-03-18 в 21 24 07" src="https://github.com/balandzin/Varregular/assets/113136992/6fa9ec20-343c-4e82-8b2b-d0e6635ea5c2">
+<img width="472" alt="Снимок экрана 2024-03-19 в 21 31 59" src="https://github.com/balandzin/Varregular/assets/113136992/bad52603-dd85-4cf2-b1e1-40ecd46c0136">
 <img width="472" alt="Снимок экрана 2024-03-18 в 21 24 14" src="https://github.com/balandzin/Varregular/assets/113136992/641d17c9-826a-4d20-a1cb-80101d578f01">
 <img width="472" alt="Снимок экрана 2024-03-18 в 21 24 24" src="https://github.com/balandzin/Varregular/assets/113136992/83d095c7-46fd-46fd-9228-be188ec88d4f">
 <img width="472" alt="Снимок экрана 2024-03-18 в 21 24 37" src="https://github.com/balandzin/Varregular/assets/113136992/7d752b75-a0c8-45a8-a061-a9893193f298">
